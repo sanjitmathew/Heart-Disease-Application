@@ -1,29 +1,17 @@
 # -*- coding: utf-8 -*-
 """
-Created on Fri Apr  5 16:49:59 2019
+Created on Fri Apr  5 10:28:21 2019
 
 @author: sanjith
 """
-#import libraries
+
 import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
 
-# Importing the Dataset
-dataset = pd.read_csv('heart.csv')
-X = dataset.iloc[:,0:13].values
-y = dataset.iloc[:, 13].values
-
-# Feature Scaling the Data
-from sklearn.preprocessing import StandardScaler
-sc = StandardScaler()
-X = sc.fit_transform(X)
-
-# Classification Object
-
-from sklearn.svm import SVC
-classifier = SVC(C=7,kernel= 'linear',random_state=0)   #kernel='rbf' for kernelsvm
-classifier.fit(X,y)
+#to load an object
+from joblib import load
+classifier=load('heart.joblib')
 
 choice=1
 while choice:
@@ -46,12 +34,7 @@ while choice:
     val.append(values)
     res=classifier.predict(val)
     if res[0]:
-        print('\nNo Heart Disease')
+        print('No Heart Disease')
     else:
-        print('\nHeart Diseased')
-    choice = int(input('press 0 to stop:'))
-
-
-
-
-
+        print('Heart Diseased')
+    choice = int(input('press 0 to stop'))
